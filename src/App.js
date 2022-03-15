@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Header from './components/Header'
+import FormularioTarea from './components/FormularioTarea';
 import './App.css';
+import ListaTareas from './components/ListaTareas';
 
-function App() {
+const App = () => {
+  const [tareas, cambiarTareas] = useState(
+    [
+      {
+        id:0,
+        nombre: 'Lavar la ropa',
+        completada:false
+      },
+      
+      {
+        id:1,
+        nombre: 'Estudiar',
+        completada:true
+      }
+    ]
+  )
+
+  const [mostrarCompletadas, cambiarMostrarCompletadas] = useState(true);
+  console.log(tareas)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="contenedor">
+      <Header mostrarCompletadas={mostrarCompletadas} cambiarMostrarCompletadas={cambiarMostrarCompletadas}/>
+      <FormularioTarea tareas={tareas} cambiarTareas={cambiarTareas}/>
+      <ListaTareas tareas={tareas} cambiarTareas={cambiarTareas} mostrarCompletadas={mostrarCompletadas}/>
     </div>
   );
 }
